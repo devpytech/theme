@@ -1,0 +1,20 @@
+{{!-- This is the post loop - each post will be output using this markup --}}
+<div class="nav w-100 fl pl2 pt2 pl3-l pt3-l">{{pagination}}</div>
+
+<div class="w-100 fl">
+{{#foreach posts}}
+<article class="bg-white w-100 w-50-l h-100 fl mt3 {{post_class}}">
+  <div class="ba b--black-10 ma1" style="height: 442px;">
+  <a href="{{url}}" title="{{title}}">
+    <div style="background-color: grey; background-image: url({{image}}); height:200px; background-size: cover; background-position: 50% 50%;"></div>
+  </a>
+  <div class="pa3">
+    <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{title}}</a>
+    <p class="gray db" style="height: 84px;">{{excerpt words="20"}} <a href="{{url}}" class="f5 b pointer dib bg-white black-70 link underline-hover border-box">[...]</a></p>
+    <small class="gray db">{{author}} - {{date published_at timeago="true"}} - {{tags limit="1"}}</small>
+    <small class="gray db"><a href="{{url}}#disqus_thread">No Comments</a></small>
+  </div>
+  </div>
+</article>
+{{/foreach}}
+</div>

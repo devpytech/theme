@@ -1,0 +1,34 @@
+{
+    "name": "devpy",
+    "description": "Theme for devpy.me",
+    "demo": "https://www.devpy.me",
+    "version": "0.1",
+    "engines": {
+        "ghost": ">=0.9.0 <1.0.0"
+    },
+    "license": "MIT",
+    "screenshots": {
+        "desktop": "assets/screenshot-desktop.jpg",
+        "mobile": "assets/screenshot-mobile.jpg"
+    },
+    "author": {
+        "name": "Robert Washbourne",
+        "email": "robert@devpy.me",
+        "url": "https://www.devpy.me"
+    },
+    "gpm": {
+        "type": "theme",
+        "categories": [
+            "Minimal"
+        ]
+    },
+    "keywords": [
+        "ghost",
+        "theme"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/devpytech/theme.git"
+    },
+    "bugs": "https://github.com/devpytech/issues"
+}

@@ -1,0 +1,4 @@
+{{#foreach navigation}}
+<a class="{{#if current}} nav-current{{/if}} link dim gray    f6 f5-ns dib mr3" href="{{url absolute="true"}}" title="{{label}}">{{label}}</a>
+{{/foreach}}
+<a class="subscribe-button link dim gray f6 f5-ns dib" href="{{@blog.url}}/subscribe/">Subscribe</a>

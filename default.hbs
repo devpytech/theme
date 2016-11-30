@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{!-- Brand icon --}}
+    {{! Favicon }}
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/assets/favicons/manifest.json">
+    <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png">
+    <meta name="msappliandcation-config" content="/assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    {{!-- Styles'n'Scripts --}}
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.5.5/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-tomorrow.min.css" integrity="sha256-jgXLxefZnwwQBFLBA/Sus9I5gqmuiNEhyAcTicWvdjk=" crossorigin="anonymous" />
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+</head>
+<body class="fl w-100">
+    <div class="site-wrapper center mw8 w-100">
+
+        {{!-- The blog header --}}
+        {{> "header"}}
+        
+        {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+        {{{body}}}
+				
+				<div class="sidebar w-25-l w-100 fr pa2 pa3-ns" id="sidebar">
+            <div style="min-height:237px;"><script async type="text/javascript" src="//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=devpyme" id="_carbonads_js"></script></div>
+            <form class="mt2 mt3-l" onsubmit="event.preventDefault(); search();">
+                <input class="w-80 fl input-reset bg-black-10 bn pl2 br--left-ns" placeholder="Search DevPy" type="text" name="query" value="" id="searchinp">
+                <input class="w-20 fl button-reset bg-animate bg-black-70 hover-bg-black white bn br--right-ns" type="submit" value="go">
+            </form>
+            <div id="searchres"></div>
+        </div>
+        
+        <footer class="mt3 pv3 ph3 ph4-m ph5-l mid-gray w-100 fl bt">
+          <small class="f6 db tc">&copy; {{date format="YYYY"}} <b class="ttu">{{@blog.title}}</b>, All Rights Reserved. Inquiries at <b>robert@devpy.me</b></small>
+          <div class="tc mt3">
+            <a href="/tag/ubuntu/" title="Ubuntu" class="f6 dib ph2 link mid-gray dim">Ubuntu</a>
+            <a href="/tag/themes/" title="Themes" class="f6 dib ph2 link mid-gray dim">Linux Themes</a>
+            <a href="/tag/top-ten/" title="Top Ten" class="f6 dib ph2 link mid-gray dim">Top Ten</a>
+            <a href="/tag/top-five/" title="Top Five" class="f6 dib ph2 link mid-gray dim">Top Five</a>
+						<a href="/privacy-policy/" title="Privacy" class="f6 dib ph2 link mid-gray dim">Privacy</a>
+          </div>
+        </footer>
+    </div>
+
+    {{ghost_foot}}
+    <script type="text/javascript">
+    function search() {
+        document.getElementById("searchres").innerHTML = "";
+        var searchval = document.getElementById("searchinp").value;
+		console.log(searchval);
+		var script = document.createElement("script");
+		script.setAttribute("src", "https://www.tapirgo.com/api/1/search.json?token=583b773814ad665aca356f24&callback=parseres&query="+searchval);
+		document.body.appendChild(script);
+		script.outerHTML = "";
+		script.delete;
+    }
+    function parseres(res) {
+        console.log(res);
+        for(var i=0;i<Math.min(res.length,3);i++) {
+            var article = document.createElement('article');
+            var div = document.createElement('div');
+            var indiv = document.createElement('div');
+            var a = document.createElement('a');
+            a.className = "lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box";
+            indiv.className = "pa3";
+            div.className = "ba b--black-10 ma1";
+            article.className = "bg-white w-100 h-100 fl mt3";
+            a.href = res[i].link;
+            a.innerText = res[i].title;
+            article.appendChild(div);
+            div.appendChild(indiv);
+            indiv.appendChild(a);
+            document.getElementById("searchres").appendChild(article);
+        }
+    }
+    </script>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-77238872-2', 'auto');
+			ga('send', 'pageview');
+
+		</script>
+    <script id="dsq-count-scr" src="//devpy.disqus.com/count.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/prism.min.js" integrity="sha256-FYhw9hzKPuQpoFU1U+xqDo3Da3TMzk1HoHbV7sGEBd8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-bash.min.js" integrity="sha256-S6zXTwtwrSxhUft+sCj0utu0xRDGnn2TpAz/95X4MXU=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/components/prism-python.min.js" integrity="sha256-j+FbQpqA8n10XM3QkjA4cXEG94DXE1MDwDf+iFLFylk=" crossorigin="anonymous"></script>
+
+</body>
+</html>

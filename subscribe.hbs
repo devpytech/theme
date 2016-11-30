@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+    <meta name="description" content="{{meta_description}}" />
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    {{!-- Brand icon --}}
+    {{! Favicon }}
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/assets/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/assets/favicons/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/assets/favicons/manifest.json">
+    <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/assets/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-TileImage" content="/assets/favicons/mstile-144x144.png">
+    <meta name="msappliandcation-config" content="/assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    {{!-- Styles'n'Scripts --}}
+    <link rel="stylesheet" href="//unpkg.com/tachyons@4.5.5/css/tachyons.min.css"/>
+    
+    <style>
+    html {
+        line-height: 1.5rem;
+    }
+    </style>
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+</head>
+<body class="{{body_class}} fl w-100">
+    <div class="site-wrapper center mw8 w-100">
+
+        {{!-- The blog header --}}
+        {{> "header"}}
+        
+        <div class="pa4-l">
+          <form class="bg-white mw7 center pa4 br2-ns ba b--black" onsubmit="event.preventDefault(); doSub();">
+            <fieldset class="cf bn ma0 pa0">
+              <legend class="pa0 f5 f4-ns mb3 black-70">Subscribe to DevPy</legend>
+              <div class="cf">
+                <input id="email" class="f6 f5-l input-reset bn fl black-80 bg-black-10 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Your Email Address" type="text" name="Email_Adress" value="" id="Email_Adress" autofocus>
+                <input style="height: 51px" class="f6 f5-l button-reset fl pv2 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" type="submit" value="Subscribe">
+              </div>
+              <div class="mt2 mt3-l" id="subres"></div>
+            </fieldset>
+          </form>
+        </div>
+    </div>
+
+    {{ghost_foot}}
+    <script type="text/javascript">
+    function post(path, params) {
+        var http = new XMLHttpRequest();
+        var url = path;
+        http.open("POST", url, true);
+        
+        //Send the proper header information along with the request
+        http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        
+        http.onreadystatechange = function() {//Call a function when the state changes.
+            if(http.readyState == 4 && http.status == 200) {
+                var res = JSON.parse(http.responseText);
+                var subres = document.getElementById("subres");
+                console.log(res,res["success"]);
+                if (res["success"]) {
+                    subres.innerHTML = "You are now subscribed.";
+                    ga('send', 'event', 'Subscribe', 'subscribe', 'Page');
+                } else {
+                    subres.innerHTML = res["error"];
+                }
+            }
+        }
+        http.send(params);
+    }
+    function doSub() {
+        var em = document.getElementById("email").value;
+        post('https://grunt.devpy.me/subscribe', "email="+em);
+    }
+    </script>
+</body>
+</html>

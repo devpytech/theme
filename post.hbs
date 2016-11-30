@@ -1,0 +1,220 @@
+{{!< default}}
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=511825045693792";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{{!-- The comment above "< default" means - insert everything in this file into
+    the {{{body}}} of the default.hbs template, containing the blog header/footer. --}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+<nav id="articlenav" class="mw8 pv2 pv3-ns bb bg-white w-100" style="display: none;">
+    <a class="link dim black b f6 f5-ns dib mr3" href="{{@blog.url}}" title="Home">DevPy</a>
+    <span class="gray f6 f5-ns dib mr3" id="titlenav">{{title}}</span>
+    <span class="sharebuttons" style="position: absolute;right: 0;">
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;ga('send', 'event', 'Share', 'facebook', 'Share');" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="{{asset "/black/Facebook.png"}}"></a>
+    <a href="https://twitter.com/intent/tweet?source={{url absolute="true"}}&text={{title}}&via=devpytech"  onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;ga('send', 'event', 'Share', 'twitter', 'Share');" target="_blank" title="Tweet"><img alt="Tweet" src="{{asset "/black/Twitter.png"}}"></a>
+    <a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;ga('send', 'event', 'Share', 'google', 'Share');" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="{{asset "/black/Google+.png"}}"></a>
+    <a href="http://www.reddit.com/submit?url={{url absolute="true"}}" onclick="window.open(this.href, 'reddit-share','width=873,height=692');return false;ga('send', 'event', 'Share', 'reddit', 'Share');" target="_blank" title="Submit to Reddit"><img alt="Submit to Reddit" src="{{asset "/black/Reddit.png"}}"></a>
+    </span>
+</nav>
+    
+<div class="w-75-l w-100 fl">
+<main class="content bg-white black-80" role="main">
+    <article class="{{post_class}} athelas">
+        <h1 class="lh-title">{{title}}</h1>
+        <p class="gray db">{{author}} - {{date published_at timeago="true"}} - {{tags limit="4"}}</p>
+        <img src="{{image}}" />
+        {{content class="measure-wide f5 pv5 lh-copy ph2"}}
+    </article>
+    <div class="pa4-l">
+      <form class="bg-white mw7 center pa4 br2-ns ba b--black" onsubmit="event.preventDefault(); doSub();">
+        <fieldset class="cf bn ma0 pa0">
+          <legend class="pa0 f5 f4-ns mb3 black-70">Subscribe to DevPy</legend>
+          <div class="mb2 mb3-l">Get a post every few weeks, no spam.</div>
+          <div class="cf">
+            <input id="email" class="f6 f5-l input-reset bn fl black-80 bg-black-10 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" placeholder="Your Email Address" type="text" name="Email_Adress" value="" id="Email_Adress">
+            <input style="height: 51px" class="f6 f5-l button-reset fl pv2 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" type="submit" value="Subscribe">
+          </div>
+          <div class="mt2 mt3-l" id="subres"></div>
+        </fieldset>
+      </form>
+    </div>
+</main>
+
+<section class="post-comments">
+    <div id="disqus_thread"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = "{{url absolute="true"}}";
+            this.page.identifier = {{id}};
+        };
+        (function() {
+            var d = document, s = d.createElement('script');
+
+            s.src = '//devpy.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+</section>
+
+{{!-- Links to Previous/Next posts --}}
+<aside class="read-next">
+    {{#next_post}}
+    <article class="bg-white w-100 w-50-l h-100 fl mt3">
+      <div class="ba b--black-10 ma1" style="height: 412px;">
+      <a href="{{url}}" title="{{title}}">
+        <div style="background-color: grey; background-image: url({{image}}); height:200px; background-size: cover; background-position: 50% 50%;"></div>
+      </a>
+      <div class="pa3">
+        <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{title}}</a>
+        <p class="gray db" style="height: 84px;">{{excerpt words="20"}} <a href="{{url}}" class="f5 b pointer dib bg-white black-70 link underline-hover border-box">[...]</a></p>
+        <small class="gray db pv2"><a href="{{author.name}}">{{author.name}}</a> - {{date published_at timeago="true"}} - {{tags limit="1"}}</small>
+      </div>
+      </div>
+    </article>
+    {{/next_post}}
+    {{#prev_post}}
+    <article class="bg-white w-100 w-50-l h-100 fl mt3">
+      <div class="ba b--black-10 ma1" style="height: 412px;">
+      <a href="{{url}}" title="{{title}}">
+        <div style="background-color: grey; background-image: url({{image}}); height:200px; background-size: cover; background-position: 50% 50%;"></div>
+      </a>
+      <div class="pa3">
+        <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{title}}</a>
+        <p class="gray db" style="height: 84px;">{{excerpt words="20"}} <a href="{{url}}" class="f5 b pointer dib bg-white black-70 link underline-hover border-box">[...]</a></p>
+        <small class="gray db pv2"><a href="{{author.name}}">{{author.name}}</a> - {{date published_at timeago="true"}} - {{tags limit="1"}}</small>
+      </div>
+      </div>
+    </article>
+    {{/prev_post}}
+</aside>
+</div>
+
+<div class="sidebar w-25-l w-100 fr pa2 pa3-ns" id="sidebar">
+  <g:plusone></g:plusone>
+  <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script type="text/javascript" src="//www.redditstatic.com/button/button1.js"></script>
+  <a class="twitter-share-button"
+    href="https://twitter.com/intent/tweet?text={{title}}">
+  Tweet</a>
+  <div class="fb-like" data-href="{{url absolute='true'}}" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
+</div>
+{{/post}}
+
+<div id="bio_ep">
+    <div class="modal" style="padding:20px;">
+        <img src="http://www.devpy.me/content/images/2016/06/DevPy.png" style="top: 0;width: 270px;position: absolute;right: 100%;">
+        <div class="modal-title">
+            <h3>DevPy Newletter</h3>
+        </div>
+
+        <div class="modal-body">
+            <i>Learn more open source. Subscribe to make windows suffer!</i>
+            <p>We don't spam, and we only send emails once or twice a week.</p>
+            <form id="subscribePop" onsubmit="event.preventDefault(); doSubPop();">
+                <div id="subscribe">
+                  <input type="email" value="" name="EMAIL" class="email gh-input" id="emailPop" placeholder="email address">
+                  <input type="submit" value="Subscribe" name="subscribe" class="button" style="width:160px !important">
+                </div>
+            </form>
+            <p id="subresPop"></p>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript" src="{{asset "bioep.min.js"}}"></script>
+<script>
+bioEp.init({
+  width: 500,
+  height: 270,
+  cookieExp: 10,
+});
+</script>
+<script>
+var el = document.getElementById('articlenav');
+var disttop = document.getElementById('topnav').offsetTop;
+
+window.onscroll = function() {
+    var y = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+    if (y >= disttop) {
+        el.style = 'position: fixed; top: 0; z-index:9999;';
+    }
+    else {
+        el.style = 'display: none;';
+    }
+};
+</script>
+
+<script type="text/javascript">
+function post(path, params) {
+    var http = new XMLHttpRequest();
+    var url = path;
+    http.open("POST", url, true);
+    
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.onreadystatechange = function() {//Call a function when the state changes.
+        if(http.readyState == 4 && http.status == 200) {
+            var res = JSON.parse(http.responseText);
+            var subres = document.getElementById("subres");
+            
+            if (res["success"]) {
+                subres.innerHTML = "You are now subscribed.";
+                ga('send', 'event', 'Subscribe', 'subscribe', 'Post');
+            } else {
+                subres.innerHTML = res["error"];
+            }
+        }
+    }
+    http.send(params);
+}
+function postPop(path, params) {
+    var http = new XMLHttpRequest();
+    var url = path;
+    http.open("POST", url, true);
+    
+    //Send the proper header information along with the request
+    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    
+    http.onreadystatechange = function() {//Call a function when the state changes.
+        if(http.readyState == 4 && http.status == 200) {
+            var res = JSON.parse(http.responseText);
+            var subres = document.getElementById("subresPop");
+            var close = document.getElementById("close");
+            
+            if (res["success"]) {
+                subres.innerHTML = "You are now subscribed.";
+                ga('send', 'event', 'Subscribe', 'subscribe', 'Popup');
+                close.innerHTML = "close";
+            } else {
+                subres.innerHTML = res["error"];
+            }
+        }
+    }
+    http.send(params);
+}
+
+function doSub() {
+    var em = document.getElementById("email").value;
+    post('https://grunt.devpy.me/subscribe', "email="+em);
+}
+function doSubPop() {
+    var em = document.getElementById("emailPop").value;
+    postPop('https://grunt.devpy.me/subscribe', "email="+em);
+}
+window.onload = function () { 
+    document.getElementById("bio_ep_close").innerHTML = "no thanks, I don't like linux";
+}
+</script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>

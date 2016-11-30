@@ -1,0 +1,27 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+<div class="w-75-l w-100 fl">
+<article class="bg-white w-100 h-100 fl mt3">
+  <div class="ba b--black-10 ma1">
+  <a href="{{url}}" title="{{name}}">
+    <div style="height:200px; background-size: cover; background-position: 50% 50%; {{#if tag.image}}background-image: url({{tag.image}}){{else}}{{#if @blog.cover}}background-image: url({{@blog.cover}}){{else}}background-color: grey;{{/if}}{{/if}}"></div>
+  </a>
+  <div class="pa3">
+    {{#tag}}
+    <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{name}}</a>
+    <p class="gray db">
+        {{#if description}}
+            {{description}}
+        {{else}}
+            A {{../pagination.total}}-post collection
+        {{/if}}
+    </p>
+    {{/tag}}
+  </div>
+  </div>
+</article>
+
+{{!-- The tag below includes the post loop - partials/loop.hbs --}}
+{{> "loop"}}
+</div>

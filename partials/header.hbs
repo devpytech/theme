@@ -1,0 +1,17 @@
+{{!-- The big featured header --}}
+<header class="bg-white black-80" style="height: 163px;">
+    <div style="background-image: url({{@blog.cover}}); background-size: cover; text-align: center;height: 78px;" class="w-100 pt2 pb2">
+        <a class="blog-logo h-100-l" href="{{@blog.url}}"><img class="h-100" id="header-image" src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
+        <div style="display:none;">{{@blog.description}}</div>
+    </div>
+    <nav id="topnav" class="mt1 pv2 pv3-ns bb w-100">
+        <a class="link dim black b f6 f5-ns dib mr3" href="{{@blog.url}}" title="Home">DevPy</a>
+        {{navigation}}
+        <span class="sharebuttons" style="float:right;margin-top: -0.25rem;">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{url absolute="true"}}&t={{title}}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook" target="_blank"><img alt="Share on Facebook" src="{{asset "/black/Facebook.png"}}"></a>
+        <a href="https://twitter.com/intent/tweet?source={{url absolute="true"}}&text={{encode title}}&via=devpytech"  onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" target="_blank" title="Tweet"><img alt="Tweet" src="{{asset "/black/Twitter.png"}}"></a>
+        <a href="https://plus.google.com/share?url={{url absolute="true"}}" onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" target="_blank" title="Share on Google+"><img alt="Share on Google+" src="{{asset "/black/Google+.png"}}"></a>
+        <a href="http://www.reddit.com/submit?url={{url absolute="true"}}&title={{title}}" onclick="window.open(this.href, 'reddit-share','width=873,height=692');return false;" target="_blank" title="Submit to Reddit"><img alt="Submit to Reddit" src="{{asset "/black/Reddit.png"}}"></a>
+        </span>
+    </nav>
+</header>

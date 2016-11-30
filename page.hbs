@@ -1,0 +1,14 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+<div class="w-75-l w-100 fl">
+<main class="content bg-white black-80" role="main">
+    <article class="{{post_class}} athelas">
+        <h1 class="lh-title">{{title}}</h1>
+        <img src="{{image}}" />
+        {{content class="measure-wide f5 pv5 lh-copy ph2"}}
+    </article>
+</main>
+</div>
+{{/post}}

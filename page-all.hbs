@@ -1,0 +1,21 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+<div class="w-75-l w-100 fl">
+{{#get "posts" limit="all" include="author,tags" as |post|}}
+{{#foreach post}}
+<article class="bg-white w-100 h-100 fl mt3 {{post_class}}">
+  <div class="ba b--black-10 ma1">
+  <a href="{{url}}" title="{{title}}">
+    <div style="background-color: grey; background-image: url({{image}}); height:200px; background-size: cover; background-position: 50% 50%;"></div>
+  </a>
+  <div class="pa3">
+    <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{title}}</a>
+    <p class="gray db">{{excerpt words="100"}} <a href="{{url}}" class="f5 b pointer dib bg-white black-70 link underline-hover border-box">[...]</a></p>
+    <small class="gray db">{{author}} - {{date published_at timeago="true"}} - {{tags limit="1"}} - <a href="{{url}}#disqus_thread">No Comments</a></small>
+  </div>
+  </div>
+</article>
+{{/foreach}}
+{{/get}}
+</div>

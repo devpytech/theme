@@ -1,0 +1,44 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=511825045693792";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{{!-- The main content area on the homepage --}}
+
+{{!-- The tag below includes the post loop - partials/loop.hbs --}}
+<div class="w-75-l w-100 fl">
+{{#get "posts" filter="featured:true" limit="1" include="author,tags" as |featured|}}
+{{#foreach featured}}
+<article class="bg-white w-100 h-100 fl mt3 {{post_class}}">
+  <div class="ba b--black-10 ma1">
+  <a href="{{url}}" title="{{title}}">
+    <div style="background-color: grey; background-image: url({{image}}); height:200px; background-size: cover; background-position: 50% 50%;"></div>
+  </a>
+  <div class="pa3">
+    <a href="{{url}}" class="lh-title f5 b pointer dib bg-white black-70 link underline-hover border-box">{{title}}</a>
+    <p class="gray db">{{excerpt words="44"}} <a href="{{url}}" class="f5 b pointer dib bg-white black-70 link underline-hover border-box">[...]</a></p>
+    <small class="gray db pv2">{{author}} - {{date published_at timeago="true"}} - {{tags limit="1"}} - <a href="{{url}}#disqus_thread">No Comments</a></small>
+  </div>
+  </div>
+</article>
+{{/foreach}}
+{{/get}}
+
+{{> "loop"}}
+</div>
+
+<div class="sidebar w-25-l w-100 fr pa2 pa3-ns" id="sidebarsocial">
+  <div class="g-page" data-width="273" data-href="//plus.google.com/u/0/102863308385483529787" data-layout="landscape" data-rel="publisher"></div>
+  <div class="fb-page" data-href="https://www.facebook.com/devpytech/" data-width="273" data-small-header="true" data-adapt-container-width="false" data-hide-cover="true" data-show-facepile="true"><blockquote cite="https://www.facebook.com/devpytech/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/devpytech/">DevPy</a></blockquote></div>
+  <a href="https://twitter.com/DevPyTech" class="twitter-follow-button" data-size="large" data-dnt="true" data-show-count="false">Follow @DevPyTech</a>
+</div>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
