@@ -1,7 +1,9 @@
 # DevPy Ghost theme
 
 A very simple theme for ghost using tachyons css toolkit.
-See a demo on [the DevPy website.](http://DevPy.me)
+See a demo on [the DevPy website](http://DevPy.me), or the picture below.
+
+![](http://i.imgur.com/vfod9tM.png)
 
 All neccesary (and not necessary) css fits in the style tag below.
 
